@@ -4,10 +4,10 @@ from .models import Book
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['id','name', 'author', 'pages', 'published_on']
-    list_display_links = ['id', 'name']
-    list_filter = ['author', 'genre']
-    search_fields = ['id', 'name', 'author',]
+    list_display = ['name', 'pages', 'published_on']
+    list_display_links = ['name']
+    list_filter = ['genre']
+    search_fields = [ 'name', ]
 
 
 
