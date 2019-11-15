@@ -1,0 +1,32 @@
+{% load static %}
+
+<div class="sidebar">
+    <nav class="sidebar-nav">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="# ">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+                
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="# ">
+                <i class="fas fa-wallet"></i> Books
+                </a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                <i class="fas fa-money-check-alt"></i> Authors
+                </a>
+            </li>
+            
+            
+            <li class="nav-item mt-auto">
+                <a class="nav-link nav-link-success" href="{% url 'admin:index' %} " target="_top">
+                <i class="fas fa-user-shield"></i>  
+                <strong>Admin</strong>
+                </a>
+        </ul>
+    </nav>
+    <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+</div>
