@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for book in all_books %}
+    <div class="row">
+      <div class="col-xs-1-12">
+        <div class="card">
+          <div class="card-body">
+          {% if book.photo %}
+          <img src="{{book.photo.url}} " alt="">
+            {% else %}
+            <img src="https://images-na.ssl-images-amazon.com/images/I/41fhsnzKEgL._SX258_BO1,204,203,200_.jpg" alt="">
+            {% endif %}
+          </div>
+          <div class="card-footer">
+            <h3>{{book.name}}</h3>
+            <a href="" class="btn btn-primary">More info</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+{% endblock content %}
