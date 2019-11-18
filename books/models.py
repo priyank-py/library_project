@@ -17,6 +17,7 @@ class Book(models.Model):
     pages = models.PositiveSmallIntegerField(blank=True, null=True)
     published_on = models.DateField(default=date.today,blank=True, null=True)
     genre = models.CharField(max_length=50, choices=GENRE_CHOICES)
+    photo = models.ImageField(upload_to='Book_Covers/', height_field=None, width_field=None, max_length=1000, blank=True, null=True)
 
     def __str__(self):
         return self.name

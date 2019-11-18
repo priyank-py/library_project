@@ -1,24 +1,23 @@
 {% extends 'base.html' %}
-
+<div class="row d-flex">
 {% block content %}
 {% for book in all_books %}
-    <div class="row">
-      <div class="col-xs-1-12">
+      <div class="col-xs-1">
         <div class="card">
           <div class="card-body">
           {% if book.photo %}
-          <img src="{{book.photo.url}} " alt="">
+          <img class="img" width="240" height="320" src="{{ book.photo.url }}" />
             {% else %}
-            <img src="https://images-na.ssl-images-amazon.com/images/I/41fhsnzKEgL._SX258_BO1,204,203,200_.jpg" alt="">
+            <img class="img" width="240" height="320" src="https://images-na.ssl-images-amazon.com/images/I/41fhsnzKEgL._SX258_BO1,204,203,200_.jpg" alt="">
             {% endif %}
           </div>
-          <div class="card-footer">
+          <div class="card-footer ">
             <h3>{{book.name}}</h3>
+            <h4 align="right">~{{book.author}}</h4>
             <a href="" class="btn btn-primary">More info</a>
           </div>
         </div>
-      </div>
-    </div>
+      </div> 
     {% endfor %}
-
+  </div>
 {% endblock content %}
