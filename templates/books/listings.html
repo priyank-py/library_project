@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
-<div class="row d-flex">
+
 {% block content %}
+<div class="row">
 {% for book in all_books %}
-      <div class="col-xs-1">
+      <div class="col-sm-3 col-lg-3">
         <div class="card">
           <div class="card-body">
           {% if book.photo %}
@@ -14,10 +15,19 @@
           <div class="card-footer ">
             <h3>{{book.name}}</h3>
             <h4 align="right">~{{book.author}}</h4>
-            <a href="" class="btn btn-primary">More info</a>
+            <a href="{% url 'listing' book.id %} " class="btn btn-primary">More info</a> <a href="{% url 'admin:books_book_change' book.id %} " class="btn btn-warning">Modify</a>
           </div>
         </div>
       </div> 
     {% endfor %}
-  </div>
+</div>
+    <div class="col-sm-3">
+      <div class="card">
+        
+        <div class="card-footer text-muted">
+          <a href="{% url 'admin:books_book_add' %} ">Add new Book</a>
+        </div>
+      </div>
+    </div>
+  
 {% endblock content %}

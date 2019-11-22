@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+<div class="col-md-8">
+    <div class="container-fluid px-auto">
+        <div class="alert alert-success">
+            <h1>This is Summary</h1>
+            {{book.summary}}
+        </div>
+    </div>
+
+</div>
+
+<div class="col-md-4 float-right text-center">
+    
+        <div class="card-avatar">
+            <a href="#pablo">
+        {% if book.photo %}
+            <img class="img" src="{{book.photo.url}} " />
+        {% endif %}   
+            </a>
+        </div>
+        <div class="card-body">
+            <h6 class="card-category text-gray">{{book.genre}}</h6>
+            <h4 class="card-title">{{book.name}} </h4>
+            <p class="card-description">
+            {{book.author.name}}
+            </p>
+            <a href="#pablo" class="btn btn-primary btn-round">{{book.published_on}} </a>
+        </div>
+    
+</div>
+</div>
+{% endblock content %}
+
+ 
