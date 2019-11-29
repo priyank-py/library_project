@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load humanize %}
 {% block content %}
 <div class="row">
 <div class="col-md-8">
@@ -18,7 +18,7 @@
         <div class="card-avatar">
             <a href="#pablo">
         {% if book.photo %}
-            <img class="img" src="{{book.photo.url}} " />
+            <img class="card-img-top" src="{{book.photo.url}} " />
         {% endif %}   
             </a>
         </div>
@@ -28,7 +28,7 @@
             <p class="card-description">
             {{book.author.name}}
             </p>
-            <a href="#pablo" class="btn btn-primary btn-round">{{book.published_on}} </a>
+            <span class="btn btn-dark btn-round">{{book.published_on|timesince}} </span>
         </div>
     
 </div>

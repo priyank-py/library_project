@@ -22,5 +22,16 @@ class Book(models.Model):
     def __str__(self):
         return self.name
     
+    def save(self, *args, **kwargs):
+        # if self.author.books_in_collection:
+        #     self.author.books_in_collection += 1
+        # else:
+        #     self.author.books_in_collection = 1
+        # print(self.author.books_in_collection)
+        if len(self.summary) == 0:
+            self.summary = f'''
+The {self.genre} themed book {self.name} written by {self.author} was published on {self.published_on}.
+            '''
+        super(Book, self).save(*args, **kwargs)
     
     

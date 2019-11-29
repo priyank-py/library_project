@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Book
 import csv
+from rangefilter.filter import DateRangeFilter
 from django.http import HttpResponse
 # from import_export.admin import ImportExportModelAdmin
 
@@ -9,7 +10,7 @@ class BookAdmin(admin.ModelAdmin):
 # class BookAdmin(ImportExportModelAdmin):
     list_display = ['name', 'pages', 'published_on']
     list_display_links = ['name']
-    list_filter = ['genre']
+    list_filter = ['genre', ('published_on', DateRangeFilter)]
     search_fields = [ 'name', ]
     actions = ['export_to_csv',]
 
