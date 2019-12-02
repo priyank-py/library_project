@@ -1,28 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-
-<div class="container">
-<form class="d-flex my-4">
-  <input class="form-control " type="date" name="filter" id=""><input class="form-control" type="date" name="" id="">
+<form action="{% url 'listings' %} " method="GET" class="text-center mx-4 my-5 d-flex" id="filter">
+    <input type="text" name="q" id="" class="form-control mx-2 p-4" placeholder="Search your book..." />
+    <button type="submit" form="filter" class="btn btn-dark px-3" ><i class="fa fa-search" aria-hidden="true"></i></button>
 </form>
-</div>
 <div class="row">
-
+  
 {% for book in all_books %}
       <div class="col-sm-4 col-md-4 col-lg-4">
         <div class="card">
           <div class="card-body">
           {% if book.photo %}
-          <img class="card-img-top" width="240" height="320" src="{{ book.photo.url }}" />
+          <img class="img" width="240" height="320" src="{{ book.photo.url }}" />
             {% else %}
             <img class="img" width="240" height="320" src="https://images-na.ssl-images-amazon.com/images/I/41fhsnzKEgL._SX258_BO1,204,203,200_.jpg" alt="">
             {% endif %}
           </div>
           <div class="card-footer ">
-            <h3>{{book.name}}</h3>
-            {% comment %} <a href="" class="btn btn-dark">{{book.renter.date}} </a> {% endcomment %}
+            <h3>{{book.name}}</h3><a href="" class="btn btn-dark">{{book.renter.}} </a>
             <h4 align="right">~{{book.author}}</h4>
             <a href="{% url 'listing' book.id %} " class="btn btn-primary">More info</a> <a href="{% url 'admin:books_book_change' book.id %} " class="btn btn-warning">Modify</a>
           </div>
