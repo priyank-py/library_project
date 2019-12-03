@@ -35,3 +35,26 @@ The {self.genre} themed book {self.name} written by {self.author} was published 
         super(Book, self).save(*args, **kwargs)
     
     
+class Review(models.Model):
+
+    STAR_CHOICES = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    )
+    book = models.ForeignKey(Book, verbose_name=_("Book"), on_delete=models.CASCADE)
+    username = models.CharField(_("Username"), max_length=50)
+    stars = models.IntegerField(_("Stars"), choices=STAR_CHOICES)
+    comment = models.TextField(_("Your Comment"), blank=True, null=True)
+
+    class Meta:
+        verbose_name = _("Review")
+        verbose_name_plural = _("Reviews")
+
+    def __str__(self):
+        return self.username
+
+    def get_absolute_url(self):
+        return reverse("Review_detail", kwargs={"pk": self.pk})

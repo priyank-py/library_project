@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Book
+from .models import Book, Review
 import csv
 from rangefilter.filter import DateRangeFilter
 from django.http import HttpResponse
@@ -26,4 +26,4 @@ class BookAdmin(admin.ModelAdmin):
             writer.writerow([getattr(obj, field) for field in field_names])
         return response
 
-
+admin.site.register(Review)
