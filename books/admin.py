@@ -26,4 +26,10 @@ class BookAdmin(admin.ModelAdmin):
             writer.writerow([getattr(obj, field) for field in field_names])
         return response
 
-admin.site.register(Review)
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ['book', 'username', 'stars', 'comment']
+    list_display_links = ['book', 'username' ]
+    list_editable = ['stars']
+    
+

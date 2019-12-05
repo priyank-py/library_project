@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load humanize %}
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="row">
 <div class="col-md-8">
@@ -10,7 +11,6 @@
             {{book.summary}}
         </div>
     </div>
-
 </div>
 
 <div class="col-md-4 float-right text-center">
@@ -33,15 +33,25 @@
     
 </div>
 <div class="float-left">
-    <form method="POST" class="form-group">
-        {% csrf_token %}
-       
-        {{form.as_p}}
-        
 
-        <button type="submit" class="btn btn-dark">Submit</button>
-      
-    </form>
+    {% crispy form %}
+    {% comment %} <form method="POST" class="form-group">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-sm-6 col-lg-6 ">{{form.stars.label_tag}}</div>
+            <div class="col-sm-6 col-lg-6 ">{{form.stars}}</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-lg-6 ">{{form.comment.label_tag}}</div>
+            <div class="col-sm-6 col-lg-6 ">{{form.comment}}</div>
+        </div>
+        <div class="row" style="height:100px;"></div>
+        <div class="row mx-auto">
+            <button type="submit" class="btn btn-dark">Submit</button>
+        
+        </div>
+    </form> {% endcomment %}
 </div>
 </div>
 {% endblock content %}
