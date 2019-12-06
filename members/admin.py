@@ -18,12 +18,15 @@ class Rented_BooksInline(admin.TabularInline):
 class MemberAdmin(UserAdmin):
     inlines = (MemberInline, Rented_BooksInline)
 
-
+    def get_inline_instances(self, request, obj=None):
+        if not obj:
+            return list()
+        return super(MemberAdmin, self).get_inline_instances(request, obj)
 
 # class Rented_BooksAdmin(UserAdmin):
 #     inlines = (Rented_BooksInline,)
 
-    
+
 admin.site.unregister(User)
 admin.site.register(User, MemberAdmin)
 
