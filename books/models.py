@@ -44,7 +44,7 @@ class Review(models.Model):
         (4, '4'),
         (5, '5'),
     )
-    book = models.ForeignKey(Book, verbose_name=_("Book"), on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, verbose_name=_("Book"), related_name='book_review', on_delete=models.CASCADE)
     username = models.CharField(_("Username"), max_length=50)
     stars = models.IntegerField(_("Stars"), choices=STAR_CHOICES)
     comment = models.TextField(_("Your Comment"), blank=True, null=True)

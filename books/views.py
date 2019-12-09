@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Book
+from .models import Book, Review
+from django.views import View
 from .forms import ReviewForm
 from django.db.models import Q
 
@@ -40,3 +41,32 @@ def listing(request, id):
     else:
         form = ReviewForm()
     return render(request, 'books/listing.html', {'book': book, 'form':form})
+
+class ListingView(View):
+    form_class = ReviewForm
+    class_template = 'books/listing.html'
+
+    def get(self, request, id):
+        form = self.form_class()
+        book = get_object_or_404(Book, pk=id)
+        comments = Review.objects.all().filter(book=book)
+        context = {
+            'book': book,
+            'form': form,
+            'comments': comments,
+        }
+        return render(request, self.class_template, context)
+
+    def post(self, request, id):
+        book = get_object_or_404(Book, pk=id)
+        
+        form = self.form_class(request.POST)
+        if form.is_valid:
+            post = form.save(commit=False)
+            post.username = request.user.username
+            post.book = book
+            post.save()
+            return redirect('class_list', id=id)
+        
+        
+        # return render(request,  self.class_template, {'book': book, 'form':form})

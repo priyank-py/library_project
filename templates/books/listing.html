@@ -53,6 +53,21 @@
         </div>
     </form> {% endcomment %}
 </div>
+
+<ul class="list-group mr-5 col-md-8">
+    {% for comment in comments %}
+        <li class="list-group-item my-2 rounded">
+            <b>{{comment.username}}</b><br>
+            <em>{{comment.stars}} stars</em>
+            <p>
+        
+                {{comment.comment}}
+            </p>
+        </li>
+    {% endfor %}
+</ul>
+
+
 </div>
 {% endblock content %}
 
