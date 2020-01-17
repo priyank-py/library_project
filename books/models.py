@@ -1,8 +1,13 @@
 from django.db import models
 from datetime import date
+from django.shortcuts import reverse
 from authors.models import Author
 from django.utils.translation import ugettext_lazy as _
-# Create your models here.
+
+
+def upload_book(instance, filename):
+    return f'{instance.author.name}/{filename}'
+
 class Book(models.Model):
 
     GENRE_CHOICES = (
@@ -14,13 +19,19 @@ class Book(models.Model):
 
     name = models.CharField(max_length=200, verbose_name='Book Title')
     author = models.ForeignKey(Author,on_delete=models.CASCADE, null=True, blank=True)
+    book_src = models.FileField(_("Book Source"), upload_to=upload_book, blank=True, null=True)
     pages = models.PositiveSmallIntegerField(blank=True, null=True)
     published_on = models.DateField(default=date.today,blank=True, null=True)
     genre = models.CharField(max_length=50, choices=GENRE_CHOICES)
     photo = models.ImageField(upload_to='Book_Covers/', height_field=None, width_field=None, max_length=1000, blank=True, null=True)
     summary = models.TextField(_("Summary"), blank=True, null=True)
+    
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("listing", kwargs={"id": self.pk})
+    
     
     def save(self, *args, **kwargs):
         # if self.author.books_in_collection:

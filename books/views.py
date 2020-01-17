@@ -3,6 +3,10 @@ from .models import Book, Review
 from django.views import View
 from .forms import ReviewForm
 from django.db.models import Q
+from django.views.generic import View
+from django.core.serializers import serialize
+# import json
+from django.http import JsonResponse, HttpResponse 
 
 # Create your views here.
 
@@ -70,3 +74,22 @@ class ListingView(View):
         
         
         # return render(request,  self.class_template, {'book': book, 'form':form})
+
+def book_api(request):
+    context = {
+        'name': 'Head first Java',
+        'author': 'Kathy Bates'
+    }
+    # data = json.dumps(context)
+    # return HttpResponse(data, content_type='application/json')
+    return JsonResponse(context)
+
+class BookAPI(View):
+    def get(self, request, *args, **kwargs):
+        books = Book.objects.all()
+        data = serialize('json', books, fields=('name', 'author', 'published_on', 'genre'))
+        # context = {
+        #     'name': 'Head first Java',
+        #     'author': 'Kathy Bates'
+        # }
+        return HttpResponse(data, content_type='application/json')

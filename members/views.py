@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .forms import SignUpForm
 from .models import Member
 from django.core.paginator import Paginator, PageNotAnInteger
+from django.contrib.auth.decorators import login_required
 
 def signup(request):
     if request.method == "POST":
@@ -19,11 +20,12 @@ def signup(request):
     
     return render(request, 'signup.html', {'form': form})
 
+@login_required(login_url='admin:login')
 def all_members(request):
     member_list = Member.objects.all()
     page = request.GET.get('page', 1)
 
-    paginator = Paginator(member_list, 1)
+    paginator = Paginator(member_list, 10)
 
     try:
         members = paginator.page(page)

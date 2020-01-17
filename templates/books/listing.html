@@ -11,6 +11,11 @@
             {{book.summary}}
         </div>
     </div>
+
+{% comment %} {% if book.book_src %}
+    <iframe src="{{book.book_src.url}}" frameborder="1" width="100%" height="600"></iframe>
+{% endif %} {% endcomment %}
+
 </div>
 
 <div class="col-md-4 float-right text-center">
@@ -21,6 +26,11 @@
             <img class="card-img-top" src="{{book.photo.url}} " />
         {% endif %}   
             </a>
+
+            {% if book.book_src %}
+            <a href="{{book.book_src.url}}" class="btn btn-success my-2">Download</a>
+            {% endif %}
+
         </div>
         <div class="card-body">
             <h6 class="card-category text-gray">{{book.genre}}</h6>
@@ -54,8 +64,8 @@
     </form> {% endcomment %}
 </div>
 
-<ul class="list-group mr-5 col-md-8">
-    {% for comment in comments %}
+<ul class="list-group ml-5 col-md-8">
+   {% for comment in book.book_review.all %}
         <li class="list-group-item my-2 rounded">
             <b>{{comment.username}}</b><br>
             <em>{{comment.stars}} stars</em>
